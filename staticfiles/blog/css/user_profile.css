@@ -1,0 +1,32 @@
+.button-container {
+    display: flex;
+    align-items: center;
+}
+
+.button-form {
+    margin-right: 10px;
+}
+
+
+.blue-circle {
+    color: blue;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    text-align: center;
+    line-height: 24px;
+    background-color: lightblue;
+    font-weight: bold;
+}
+
+.statistic-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.statistic-item p {
+    margin: 0;
+}

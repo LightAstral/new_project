@@ -1,0 +1,29 @@
+.profile-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 5px;
+
+}
+
+.profile-field {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.profile-item .profile-field:last-child {
+    margin-right: 0;
+}
+
+.email {
+    background-color: #ccc;
+    padding: 1px;
+}
+
+.profile-field strong {
+    display: block;
+}
+
+.buttons {
+    margin-top: 15px;
+}
+
