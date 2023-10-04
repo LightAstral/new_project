@@ -1,0 +1,39 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'blog/css/edit_profile.css' %}">
+<h2>Мой аккаунт</h2>
+<h5>Проверьте и отредактируйте личную информацию ниже.</h5>
+<hr>
+<strong>Електронна пошта логіна:</strong>
+<p class="email">{{ user.email }}</p>
+<form method="post" class="profile-form">
+    {% csrf_token %}
+    <div class="profile-item">
+        <div class="profile-field">
+            <strong>Ім'я:</strong>
+            {{ user_form.first_name }}
+        </div>
+        <div class="profile-field">
+            <strong>Прізвище:</strong>
+            {{ user_form.last_name }}
+        </div>
+    </div>
+    <br>
+    <div class="profile-item">
+        <div class="profile-field">
+            <strong>Email адреса для зв'язку:</strong>
+            {{ user_form.email }}
+        </div>
+        <div class="profile-field">
+            <strong>Phone:</strong>
+            {{ profile_form.phone }}
+        </div>
+    </div>
+    <div class="buttons">
+        <button type="submit" class="btn btn-primary">Обновить</button>
+        <a href="{% url 'user_profile' %}" class="btn btn-secondary">Отменить</a>
+    </div>
+</form>
+
+{% endblock %}

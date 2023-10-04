@@ -1,0 +1,71 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'blog/css/user_profile.css' %}">
+<h2>User Profile</h2>
+<div class="user-profile">
+    <div style="float: left; margin-right: 20px;">
+        {% if user.userprofile.avatar %}
+        <img src="{{ user.userprofile.avatar.url }}" alt="Avatar" class="avatar" width="100px" height="100px"
+             style="border-radius: 50px; ">
+        {% else %}
+        <p>Аватар пользователя отсутствует</p>
+        {% endif %}
+    </div>
+
+    <div style="float: left;">
+        <p><strong>Имя:</strong> {{ user.first_name }}</p>
+        <p><strong>Группа:</strong> {{ user.groups.first }}</p>
+        <p><strong>Страна:</strong> {{ user.userprofile.country }}</p>
+
+        <div class="button-container">
+            <form method="post" enctype="multipart/form-data" class="button-form">
+                {% csrf_token %}
+                {{ avatar_form.as_p }}
+                <button type="submit" class="btn btn-primary btn-sm">Сохранить</button>
+            </form>
+
+            {% if user.userprofile.avatar %}
+            <form method="post" action="{% url 'delete_avatar' %}" class="button-form">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+            </form>
+            {% endif %}
+        </div>
+
+        <a href="{% url 'edit_profile' %}" class="btn btn-primary">Редактировать профиль</a>
+        <a href="#" class="btn btn-success">Личное сообщение</a>
+    </div>
+    <div style="clear: both;"></div>
+    <br>
+    <hr>
+
+    <h3>Статистика</h3>
+    <div class="statistic-item">
+        <p><strong>Количество комментариев:</strong></p>
+        <span class="blue-circle">{{ user.userprofile.comment_count }}</span>
+    </div>
+    <div class="statistic-item">
+        <p><strong>Материалов добавлено:</strong></p>
+        <span class="blue-circle">{{ user.userprofile.post_count }}</span>
+    </div>
+    <div class="statistic-item">
+        <p><strong>Записей на форуме:</strong></p>
+        <span class="blue-circle">{{ user.userprofile.forum_posts }}</span>
+    </div>
+    <div class="statistic-item">
+        <p><strong>Записей в блоге:</strong></p>
+        <span class="blue-circle">{{ user.userprofile.blog_posts }}</span>
+    </div>
+    <div class="statistic-item">
+        <p><strong>Дней на сайте:</strong></p>
+        <span class="blue-circle">{{ user.userprofile.days_on_site }}</span>
+    </div>
+    <div class="statistic-item">
+        <p><strong>Репутация на сайте:</strong></p>
+        <span class="blue-circle">{{ user.userprofile.reputation }}</span>
+    </div>
+
+
+</div>
+{% endblock %}

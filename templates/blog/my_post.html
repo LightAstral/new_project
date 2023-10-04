@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+  <h2>Мои посты</h2>
+  <h5>Просматривайте и управляйте своими постами</h5>
+  <hr>
+  <h3>Создать новый пост</h3>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Создать</button>
+  </form>
+  <hr>
+  <h3>Мои посты</h3>
+  {% for post in user_posts %}
+    <div class="post">
+      <h4>{{ post.title }}</h4>
+      <p>{{ post.content }}</p>
+      <a href="{% url 'delete_post' post.id %}" class="btn btn-danger">Удалить</a>
+    </div>
+    <hr>
+  {% empty %}
+    <p>У вас пока нет постов.</p>
+  {% endfor %}
+{% endblock %}
